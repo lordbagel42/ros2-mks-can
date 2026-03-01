@@ -6,6 +6,9 @@ firmware/.vscode/c_cpp_properties.json
 firmware/.vscode/launch.json
 firmware/.vscode/ipch
 
+# CodeQL
+_codeql_detected_source_root
+
 # OS files
 .DS_Store
 Thumbs.db
