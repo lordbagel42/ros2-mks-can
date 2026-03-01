@@ -461,10 +461,10 @@ class MKSServoExample(Node):
         self.create_subscription(JointState, '/joint_states', self.on_joint_state, qos)
 
         # Enable motors after a short delay
-        self.create_timer(1.0, self.enable_motors)
+        self.enable_timer = self.create_timer(1.0, self.enable_motors)
 
         # Send a position command 3 seconds after startup
-        self.create_timer(3.0, self.send_position)
+        self.position_timer = self.create_timer(3.0, self.send_position)
 
     def enable_motors(self):
         msg = Bool()
@@ -472,14 +472,14 @@ class MKSServoExample(Node):
         self.enable_pub.publish(msg)
         self.get_logger().info('Motors enabled')
         # Only fire once
-        self.destroy_timer(self.timers[0])
+        self.destroy_timer(self.enable_timer)
 
     def send_position(self):
         msg = Float64MultiArray()
         msg.data = [math.pi / 2, math.pi]  # motor_0 → 90°, motor_1 → 180°
         self.pos_pub.publish(msg)
         self.get_logger().info(f'Position command sent: {msg.data}')
-        self.destroy_timer(self.timers[0])
+        self.destroy_timer(self.position_timer)
 
     def on_joint_state(self, msg: JointState):
         for i, name in enumerate(msg.name):
