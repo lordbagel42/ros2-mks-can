@@ -19,7 +19,7 @@ integration.
 | **Motor control** | Absolute position, velocity, enable/disable, homing, e-stop |
 | **Telemetry** | Encoder position, speed, and angle-error published as `sensor_msgs/JointState` at configurable rate (default 100 Hz) |
 | **Transport** | Serial (USB, lowest latency) or WiFi — selectable at build time |
-| **Latency** | Best-effort QoS, 921 600 baud serial, zero-copy message buffers, all-on-one-core tight loop |
+| **Latency** | Best-effort QoS, 921600 baud serial, zero-copy message buffers, all-on-one-core tight loop |
 | **Multi-motor** | Up to 6 motors on the same CAN bus (configurable via `MAX_MOTORS`) |
 | **Reconnection** | Automatic agent detection, connect, and reconnect state machine |
 
@@ -187,7 +187,7 @@ To change motor CAN IDs, edit the `default_ids` array in
 
 The firmware is designed for minimum round-trip latency:
 
-1. **Serial transport at 921 600 baud** — keeps USB transfer time below 1 ms
+1. **Serial transport at 921600 baud** — keeps USB transfer time below 1 ms
    per message.
 2. **Best-effort QoS** — no acknowledgement handshake on the RMW layer.
 3. **Zero-copy static message buffers** — no `malloc` in the publish / subscribe

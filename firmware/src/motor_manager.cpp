@@ -118,7 +118,7 @@ void MotorManager::cmdVelocity(uint8_t index, double velocity_rad_s,
                                uint8_t accel) {
     if (index >= _motor_count) return;
     bool     ccw = velocity_rad_s < 0;
-    uint16_t rpm = (uint16_t)(fabs(velocity_rad_s) * 60.0 / (2.0 * M_PI));
+    uint16_t rpm = RAD_S_TO_RPM(velocity_rad_s);
     rpm = min(rpm, (uint16_t)MAX_SPEED_RPM);
     MKSServoCAN::speedMode(_states[index].can_id, rpm, accel, ccw);
 }
